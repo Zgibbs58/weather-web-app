@@ -1,14 +1,15 @@
-var lat = 36.1622767;
-var lon = -86.7742984;
+var defaultCity = "nashville";
+var lat = JSON.parse(localStorage.getItem(defaultCity));
+var lon = JSON.parse(localStorage.getItem(defaultCity));
 var city;
 var cityBtn = document.querySelector(".cityBtn");
 var currentCity = "";
-var defaultCity = "Nashville";
-console.log(currentCity);
 
 if (currentCity === "") {
   document.querySelector(".cityName").textContent = defaultCity;
 } else {
+  lat = currentCity;
+  lon = currentCity;
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8a0fe5b9b591db8dddd6997be68f3c34`;
 
   fetch(currentWeatherUrl)
