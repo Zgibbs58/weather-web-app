@@ -3,13 +3,15 @@ var lat = JSON.parse(localStorage.getItem(defaultCity));
 var lon = JSON.parse(localStorage.getItem(defaultCity));
 var city;
 var cityBtn = document.querySelector(".cityBtn");
-var currentCity = "";
+var currentCity = localStorage.key([0]);
+console.log(currentCity);
 
-if (currentCity === "") {
+if (currentCity === null) {
   document.querySelector(".cityName").textContent = defaultCity;
 } else {
-  lat = currentCity;
-  lon = currentCity;
+  lat = JSON.parse(localStorage.getItem(currentCity)).lat;
+  lon = JSON.parse(localStorage.getItem(currentCity)).lon;
+  console.log(lat);
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8a0fe5b9b591db8dddd6997be68f3c34`;
 
   fetch(currentWeatherUrl)
