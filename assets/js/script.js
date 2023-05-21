@@ -1,12 +1,15 @@
 var defaultCity = "Nashville";
 var lat;
 var lon;
-var city;
 var cityBtn = document.querySelector(".cityBtn");
 var currentCity = localStorage.key([localStorage.length - 1]);
 var currentTempEl = document.querySelector(".currentTemp");
 var currentWindEl = document.querySelector(".currentWind");
 var currentHumidEl = document.querySelector(".currentHumid");
+localStorage.setItem(
+  defaultCity,
+  JSON.stringify({ lat: 36.1622767, lon: -86.7742984 })
+);
 
 if (localStorage.length === 0) {
   document.querySelector(".cityName").textContent = defaultCity;
