@@ -1,4 +1,4 @@
-var defaultCity = "Nashville";
+var defaultCity = "nashville";
 var lat;
 var lon;
 var cityBtn = document.querySelector(".cityBtn");
@@ -13,8 +13,8 @@ localStorage.setItem(
 
 if (localStorage.length === 0) {
   document.querySelector(".cityName").textContent = defaultCity;
-  var lat = JSON.parse(localStorage.getItem(defaultCity));
-  var lon = JSON.parse(localStorage.getItem(defaultCity));
+  lat = JSON.parse(localStorage.getItem(defaultCity)).lat;
+  lon = JSON.parse(localStorage.getItem(defaultCity)).lon;
 } else {
   currentCity = localStorage.key([localStorage.length - 1]);
   lat = JSON.parse(localStorage.getItem(currentCity)).lat;
