@@ -16,6 +16,24 @@ cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Sear
 
 cityBtn.addEventListener("click", getValue);
 
+// testing to display data for clicked history button
+historyBtns.addEventListener("click", function (event) {
+  var clickedCity = event.target;
+  currentCity = clickedCity.textContent;
+  var findCity = cityData.findIndex(function (city) {
+    console.log(city.city);
+    console.log(clickedCity);
+    return city.city === clickedCity.textContent;
+  });
+  console.log(findCity);
+  if (findCity !== -1) {
+    var selectedCity = cityData[findCity];
+    cityData.splice(findCity, 1);
+    cityData.push(selectedCity);
+    localStorage.setItem("cityData", JSON.stringify(cityData));
+  }
+});
+
 function getValue(event) {
   event.preventDefault();
   var newCity = cityInput.value.toUpperCase().trim();
