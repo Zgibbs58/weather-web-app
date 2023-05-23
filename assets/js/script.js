@@ -59,6 +59,8 @@ function currentWeather() {
       console.log(data);
       document.querySelector(".cityName").textContent = currentCity;
       currentTempEl.textContent = data.main.temp;
+      currentWindEl.textContent = data.wind.speed + " MPH";
+      currentHumidEl.textContent = data.main.humidity + " %";
       console.log(currentTempEl);
       console.log(currentCity);
     });
