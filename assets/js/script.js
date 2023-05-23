@@ -3,21 +3,14 @@ var cityData = JSON.parse(localStorage.getItem("cityData")) || [];
 console.log(cityData);
 // localStorage.setItem(defaultCity, JSON.stringify({ lat: 36.1622767, lon: -86.7742984 }));
 var currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
-var lat = cityData[cityData.length - 1].lat;
-var lon = cityData[cityData.length - 1].lon;
+var lat = cityData.length > 0 ? cityData[cityData.length - 1].lat : null;
+var lon = cityData.length > 0 ? cityData[cityData.length - 1].lon : null;
 var cityBtn = document.querySelector(".cityBtn");
 var currentTempEl = document.querySelector(".currentTemp");
 var currentWindEl = document.querySelector(".currentWind");
 var currentHumidEl = document.querySelector(".currentHumid");
 
-if (cityData.length === 0) {
-  document.querySelector(".cityName").textContent = "Search for a City to view your weather";
-} else {
-  //   lat = JSON.parse(localStorage.getItem(currentCity)).lat;
-  //   lon = JSON.parse(localStorage.getItem(currentCity)).lon;
-  //   console.log(currentCity);
-  currentWeather();
-}
+cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
 
 cityBtn.addEventListener("click", function getValue(event) {
   event.preventDefault();
