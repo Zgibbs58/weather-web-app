@@ -5,16 +5,20 @@ console.log(cityData);
 var currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
 var lat = cityData.length > 0 ? cityData[cityData.length - 1].lat : null;
 var lon = cityData.length > 0 ? cityData[cityData.length - 1].lon : null;
+var cityInput = document.querySelector(".input");
 var cityBtn = document.querySelector(".cityBtn");
 var currentTempEl = document.querySelector(".currentTemp");
 var currentWindEl = document.querySelector(".currentWind");
 var currentHumidEl = document.querySelector(".currentHumid");
+var historyBtns = document.querySelector(".historyBtns");
 
 cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
 
-cityBtn.addEventListener("click", function getValue(event) {
+cityBtn.addEventListener("click", getValue);
+
+function getValue(event) {
   event.preventDefault();
-  var newCity = document.querySelector(".input").value.toUpperCase().trim();
+  var newCity = cityInput.value.toUpperCase().trim();
 
   var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + "&limit=1&appid=" + apiKey;
 
@@ -38,7 +42,7 @@ cityBtn.addEventListener("click", function getValue(event) {
       currentCity = newCity;
       currentWeather();
     });
-});
+}
 
 function currentWeather() {
   console.log(cityData);
@@ -57,4 +61,12 @@ function currentWeather() {
       console.log(currentTempEl);
       console.log(currentCity);
     });
+  cityInput.value = "";
+  historyBtns.textContent = "";
+  for (let i = 0; i < cityData.length; i++) {
+    var historyBtn = document.createElement("button");
+    historyBtn.classList.add("button", "is-dark", "is-outlined", "is-fullwidth");
+    historyBtn.textContent = cityData[i].city;
+    historyBtns.appendChild(historyBtn);
+  }
 }
