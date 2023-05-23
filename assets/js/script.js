@@ -32,6 +32,7 @@ historyBtns.addEventListener("click", function (event) {
     cityData.push(selectedCity);
     localStorage.setItem("cityData", JSON.stringify(cityData));
   }
+  currentWeather();
 });
 
 function getValue(event) {
