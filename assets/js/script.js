@@ -11,6 +11,7 @@ var currentTempEl = document.querySelector(".currentTemp");
 var currentWindEl = document.querySelector(".currentWind");
 var currentHumidEl = document.querySelector(".currentHumid");
 var historyBtns = document.querySelector(".historyBtns");
+var weatherIconEl = document.querySelector("#weather-icon");
 
 cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
 
@@ -40,6 +41,8 @@ function getValue(event) {
   var newCity = cityInput.value.toUpperCase().trim();
 
   var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + "&limit=1&appid=" + apiKey;
+
+  //   var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${apiKey}`;
 
   fetch(requestUrl)
     .then(function (response) {
@@ -74,6 +77,9 @@ function currentWeather() {
     .then(function (data) {
       console.log(data);
       document.querySelector(".cityName").textContent = currentCity;
+      var iconCode = data.weather[0].icon;
+      var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+      weatherIconEl.setAttribute("src", iconUrl);
       currentTempEl.textContent = data.main.temp;
       currentWindEl.textContent = data.wind.speed + " MPH";
       currentHumidEl.textContent = data.main.humidity + " %";
