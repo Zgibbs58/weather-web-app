@@ -95,3 +95,21 @@ function currentWeather() {
     historyBtns.appendChild(historyBtn);
   }
 }
+
+function fiveDayWeather() {
+  var fiveDayWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+
+  fetch(fiveDayWeatherUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var weatherList = data.list;
+      var noonWeatherData = weatherList.filter(function (item) {
+        var time = item.dt_txt.split(" ")[1];
+        return time === "12:00:00";
+      });
+    });
+}
+fiveDayWeather();
