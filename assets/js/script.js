@@ -83,7 +83,7 @@ function currentWeather() {
       console.log(data);
       document.querySelector(".cityName").textContent = `${currentCity} ${cMonth}/${cDay}/${cYear}`;
       var iconCode = data.weather[0].icon;
-      var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+      var iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
       weatherIconEl.setAttribute("src", iconUrl);
       currentTempEl.textContent = Math.round(data.main.temp);
       currentWindEl.textContent = `${Math.round(data.wind.speed)} MPH`;
