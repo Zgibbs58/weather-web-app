@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-link-light">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,9 +21,9 @@
         <p class="title">Weather Dashboard</p>
       </div>
     </section>
-    <div class="container">
+    
       <div class="columns">
-        <div class="column is-2 m-3">
+        <div class="column is-3 m-3">
           <h2 class="mb-3 title is-4">Search for a City:</h2>
           <div class="field">
             <p class="control has-icons-left">
@@ -44,94 +44,97 @@
           </div>
         </div>
         <div class="column is-auto">
-          <div class="box">
-            <h2 class="title cityName"></h2>
+          <div class="box ">
+            <h2 class="title cityName mb-0"></h2>
             <div id="icon"><img class="weather-icon" src="" alt="weather icon"></div>
             <p class="subtitle has-text-weight-semibold">Temp: <span class="currentTemp"></span> &#8457</p>
             <p class="subtitle has-text-weight-semibold">Wind: <span class="currentWind"></span></p>
             <p class="subtitle has-text-weight-semibold">Humidity: <span class="currentHumid"></span></p>
           </div>
           <h3 class="title">5-Day forecast</h3>
-          <div class="columns">
-            <div class="column">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">5/20/23</p>
-                </header>
-                <div class="card-content">
-                  <div class="content has-text-weight-semibold">
-                    <div id="icon"><img class="five-day-icon-1" src="" alt="weather icon"></div>
-                    <p>Temp: <span class="five-day-temp-1"></span> &#8457</p>
-                    <p>Wind: <span class="five-day-wind-1"></span> MPH</p>
-                    <p>Humidity: <span class="five-day-humid-1"></span>%</p>
+          <!-- <div class="box"> -->
+            <div class="columns mr-1">
+                <div class="column">
+                  <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title five-day-1"></p>
+                    </header>
+                    <div class="p-2">
+                      <div class="content has-text-weight-semibold">
+                        <div id="icon"><img class="five-day-icon-1" src="" alt="weather icon"></div>
+                        <p>Temp: <span class="five-day-temp-1"></span> &#8457</p>
+                        <p>Wind: <span class="five-day-wind-1"></span> MPH</p>
+                        <p>Humidity: <span class="five-day-humid-1"></span>%</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title five-day-2"></p>
+                    </header>
+                    <div class="p-2">
+                        <div class="content has-text-weight-semibold">
+                            <div id="icon"><img class="five-day-icon-2" src="" alt="weather icon"></div>
+                            <p>Temp: <span class="five-day-temp-2"></span> &#8457</p>
+                            <p>Wind: <span class="five-day-wind-2"></span> MPH</p>
+                            <p>Humidity: <span class="five-day-humid-2"></span>%</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title five-day-3"></p>
+                    </header>
+                    <div class="p-2">
+                        <div class="content has-text-weight-semibold">
+                            <div id="icon"><img class="five-day-icon-3" src="" alt="weather icon"></div>
+                            <p>Temp: <span class="five-day-temp-3"></span> &#8457</p>
+                            <p>Wind: <span class="five-day-wind-3"></span> MPH</p>
+                            <p>Humidity: <span class="five-day-humid-3"></span>%</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title five-day-4"></p>
+                    </header>
+                    <div class="p-2">
+                        <div class="content has-text-weight-semibold">
+                            <div id="icon"><img class="five-day-icon-4" src="" alt="weather icon"></div>
+                            <p>Temp: <span class="five-day-temp-4"></span> &#8457</p>
+                            <p>Wind: <span class="five-day-wind-4"></span> MPH</p>
+                            <p>Humidity: <span class="five-day-humid-4"></span>%</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title five-day-5"></p>
+                    </header>
+                    <div class="p-2">
+                        <div class="content has-text-weight-semibold">
+                            <div id="icon"><img class="five-day-icon-5" src="" alt="weather icon"></div>
+                            <p>Temp: <span class="five-day-temp-5"></span> &#8457</p>
+                            <p>Wind: <span class="five-day-wind-5"></span> MPH</p>
+                            <p>Humidity: <span class="five-day-humid-5"></span>%</p>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="column">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">5/20/23</p>
-                </header>
-                <div class="card-content">
-                    <div class="content has-text-weight-semibold">
-                        <div id="icon"><img class="five-day-icon-2" src="" alt="weather icon"></div>
-                        <p>Temp: <span class="five-day-temp-2"></span> &#8457</p>
-                        <p>Wind: <span class="five-day-wind-2"></span> MPH</p>
-                        <p>Humidity: <span class="five-day-humid-2"></span>%</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">5/20/23</p>
-                </header>
-                <div class="card-content has-text-weight-semibold">
-                    <div class="content">
-                        <div id="icon"><img class="five-day-icon-3" src="" alt="weather icon"></div>
-                        <p class="pt-3">Temp: <span class="five-day-temp-3"></span> &#8457</p>
-                        <p>Wind: <span class="five-day-wind-3"></span> MPH</p>
-                        <p>Humidity: <span class="five-day-humid-3"></span>%</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">5/20/23</p>
-                </header>
-                <div class="card-content has-text-weight-semibold">
-                    <div class="content">
-                        <div id="icon"><img class="five-day-icon-4" src="" alt="weather icon"></div>
-                        <p class="pt-3">Temp: <span class="five-day-temp-4"></span> &#8457</p>
-                        <p>Wind: <span class="five-day-wind-4"></span> MPH</p>
-                        <p>Humidity: <span class="five-day-humid-4"></span>%</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">5/20/23</p>
-                </header>
-                <div class="card-content has-text-weight-semibold">
-                    <div class="content">
-                        <div id="icon"><img class="five-day-icon-5" src="" alt="weather icon"></div>
-                        <p class="pt-3">Temp: <span class="five-day-temp-5"></span> &#8457</p>
-                        <p>Wind: <span class="five-day-wind-5"></span> MPH</p>
-                        <p>Humidity: <span class="five-day-humid-5"></span>%</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- </div> -->
+          
         </div>
       </div>
-    </div>
+   
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

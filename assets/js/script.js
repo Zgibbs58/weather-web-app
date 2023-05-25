@@ -1,6 +1,9 @@
 var apiKey = "8a0fe5b9b591db8dddd6997be68f3c34";
 var cityData = JSON.parse(localStorage.getItem("cityData")) || [];
-var today = new Date();
+var currentDate = new Date();
+var cDay = currentDate.getDate();
+var cMonth = currentDate.getMonth();
+var cYear = currentDate.getFullYear();
 var currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
 var lat = cityData.length > 0 ? cityData[cityData.length - 1].lat : null;
 var lon = cityData.length > 0 ? cityData[cityData.length - 1].lon : null;
@@ -31,7 +34,7 @@ historyBtns.addEventListener("click", function (event) {
     cityData.push(selectedCity);
     localStorage.setItem("cityData", JSON.stringify(cityData));
   }
-  currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
+  currentCity = cityData[cityData.length - 1].city;
   lat = cityData[cityData.length - 1].lat;
   lon = cityData[cityData.length - 1].lon;
   currentWeather();
@@ -59,7 +62,6 @@ function getValue() {
 
       localStorage.setItem("cityData", JSON.stringify(cityData));
       console.log(data[0].state);
-      document.querySelector(".cityName").textContent = newCity;
       currentCity = newCity;
       currentWeather();
       fiveDayWeather();
@@ -74,7 +76,7 @@ function currentWeather() {
     })
     .then(function (data) {
       console.log(data);
-      document.querySelector(".cityName").textContent = currentCity;
+      document.querySelector(".cityName").textContent = `${currentCity} ${cMonth}/${cDay}/${cYear}`;
       var iconCode = data.weather[0].icon;
       var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
       weatherIconEl.setAttribute("src", iconUrl);
@@ -114,11 +116,12 @@ function fiveDayWeather() {
 
       timeWeatherInfo.forEach(function (info) {
         var iconCode = info[3];
-        var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
         document.querySelector(`.five-day-icon-${iter}`).setAttribute("src", iconUrl);
         document.querySelector(`.five-day-temp-${iter}`).textContent = Math.round(info[0]);
         document.querySelector(`.five-day-wind-${iter}`).textContent = Math.round(info[1]);
         document.querySelector(`.five-day-humid-${iter}`).textContent = Math.round(info[2]);
+        document.querySelector(`.five-day-${iter}`).textContent = `${cMonth}/${cDay + iter}/${cYear}`;
         iter++;
       });
     });
