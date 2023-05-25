@@ -18,6 +18,11 @@ var weatherIconEl = document.querySelector(".weather-icon");
 cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
 fiveDayWeather();
 
+document.querySelector(".clearCityBtn").addEventListener("click", function () {
+  localStorage.clear();
+  location.reload();
+});
+
 cityBtn.addEventListener("click", getValue);
 
 // testing to display data for clicked history button
