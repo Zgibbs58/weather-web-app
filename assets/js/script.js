@@ -11,7 +11,7 @@ var currentTempEl = document.querySelector(".currentTemp");
 var currentWindEl = document.querySelector(".currentWind");
 var currentHumidEl = document.querySelector(".currentHumid");
 var historyBtns = document.querySelector(".historyBtns");
-var weatherIconEl = document.querySelector("#weather-icon");
+var weatherIconEl = document.querySelector(".weather-icon");
 
 cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
 
@@ -75,11 +75,11 @@ function currentWeather() {
       console.log(data);
       document.querySelector(".cityName").textContent = currentCity;
       var iconCode = data.weather[0].icon;
-      var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+      var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
       weatherIconEl.setAttribute("src", iconUrl);
       currentTempEl.textContent = Math.round(data.main.temp);
       currentWindEl.textContent = `${Math.round(data.wind.speed)} MPH`;
-      currentHumidEl.textContent = `${Math.round(data.main.humidity)} %`;
+      currentHumidEl.textContent = `${Math.round(data.main.humidity)}%`;
       console.log(currentTempEl);
       console.log(currentCity);
     });
@@ -94,26 +94,34 @@ function currentWeather() {
   }
 }
 
-// function fiveDayWeather() {
-//   var fiveDayWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
-// var fiveDayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
-//   fetch(fiveDayWeatherUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       var weatherList = data.list;
-//       var noonWeatherData = weatherList.filter(function (item) {
-//         var time = item.dt_txt.split(" ")[1];
-//         return time === "12:00:00";
-//       });
-//       var noonWeatherInfo = noonWeatherData.map(function (item) {
-//         item.main.temp;
-//         item.main.humidity;
-//         item.wind.speed;
-//         item.weather[0].icon;
-//       });
-//     });
-// }
-// fiveDayWeather();
+function fiveDayWeather() {
+  var fiveDayWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+  // var fiveDayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+  fetch(fiveDayWeatherUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var weatherList = data.list;
+      var noonWeatherData = weatherList.filter(function (item) {
+        var time = item.dt_txt.split(" ")[1];
+        return time === "12:00:00";
+      });
+      var noonWeatherInfo = noonWeatherData.map(function (item) {
+        return [item.main.temp, item.wind.speed, item.main.humidity, item.weather[0].icon];
+      });
+      iter = 1;
+
+      noonWeatherInfo.forEach(function (info) {
+        var iconCode = info[3];
+        var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        document.querySelector(`.five-day-icon-${iter}`).setAttribute("src", iconUrl);
+        document.querySelector(`.five-day-temp-${iter}`).textContent = Math.round(info[0]);
+        document.querySelector(`.five-day-wind-${iter}`).textContent = Math.round(info[1]);
+        document.querySelector(`.five-day-humid-${iter}`).textContent = Math.round(info[2]);
+        iter++;
+      });
+    });
+}
+fiveDayWeather();
