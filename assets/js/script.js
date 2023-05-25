@@ -49,7 +49,7 @@ historyBtns.addEventListener("click", function (event) {
 function getValue() {
   var newCity = cityInput.value.toUpperCase().trim();
 
-  var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${apiKey}`;
+  var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${apiKey}`;
 
   fetch(requestUrl)
     .then(function (response) {
@@ -121,7 +121,7 @@ function fiveDayWeather() {
 
       timeWeatherInfo.forEach(function (info) {
         var iconCode = info[3];
-        var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+        var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
         document.querySelector(`.five-day-icon-${iter}`).setAttribute("src", iconUrl);
         document.querySelector(`.five-day-temp-${iter}`).textContent = Math.round(info[0]);
         document.querySelector(`.five-day-wind-${iter}`).textContent = Math.round(info[1]);
