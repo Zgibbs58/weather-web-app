@@ -1,7 +1,6 @@
 var apiKey = "8a0fe5b9b591db8dddd6997be68f3c34";
 var cityData = JSON.parse(localStorage.getItem("cityData")) || [];
-console.log(cityData);
-// localStorage.setItem(defaultCity, JSON.stringify({ lat: 36.1622767, lon: -86.7742984 }));
+var today = new Date();
 var currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
 var lat = cityData.length > 0 ? cityData[cityData.length - 1].lat : null;
 var lon = cityData.length > 0 ? cityData[cityData.length - 1].lon : null;
@@ -14,6 +13,7 @@ var historyBtns = document.querySelector(".historyBtns");
 var weatherIconEl = document.querySelector(".weather-icon");
 
 cityData.length === 0 ? (document.querySelector(".cityName").textContent = "Search for a City to view your weather") : currentWeather();
+fiveDayWeather();
 
 cityBtn.addEventListener("click", getValue);
 
@@ -22,8 +22,6 @@ historyBtns.addEventListener("click", function (event) {
   var clickedCity = event.target;
   currentCity = clickedCity.textContent;
   var findCity = cityData.findIndex(function (city) {
-    console.log(city.city);
-    console.log(clickedCity);
     return city.city === clickedCity.textContent;
   });
   console.log(findCity);
@@ -33,11 +31,14 @@ historyBtns.addEventListener("click", function (event) {
     cityData.push(selectedCity);
     localStorage.setItem("cityData", JSON.stringify(cityData));
   }
+  currentCity = cityData.length > 0 ? cityData[cityData.length - 1].city : null;
+  lat = cityData[cityData.length - 1].lat;
+  lon = cityData[cityData.length - 1].lon;
   currentWeather();
+  fiveDayWeather();
 });
 
-function getValue(event) {
-  event.preventDefault();
+function getValue() {
   var newCity = cityInput.value.toUpperCase().trim();
 
   var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${newCity}&limit=1&appid=${apiKey}`;
@@ -61,11 +62,11 @@ function getValue(event) {
       document.querySelector(".cityName").textContent = newCity;
       currentCity = newCity;
       currentWeather();
+      fiveDayWeather();
     });
 }
 
 function currentWeather() {
-  console.log(cityData);
   var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   fetch(currentWeatherUrl)
     .then(function (response) {
@@ -83,7 +84,6 @@ function currentWeather() {
       console.log(currentTempEl);
       console.log(currentCity);
     });
-  // look at using includes to see if array item already exists in array
   cityInput.value = "";
   historyBtns.textContent = "";
   for (let i = 0; i < cityData.length; i++) {
@@ -95,8 +95,7 @@ function currentWeather() {
 }
 
 function fiveDayWeather() {
-  var fiveDayWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
-  // var fiveDayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+  var fiveDayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   fetch(fiveDayWeatherUrl)
     .then(function (response) {
       return response.json();
@@ -104,16 +103,16 @@ function fiveDayWeather() {
     .then(function (data) {
       console.log(data);
       var weatherList = data.list;
-      var noonWeatherData = weatherList.filter(function (item) {
+      var timeWeatherData = weatherList.filter(function (item) {
         var time = item.dt_txt.split(" ")[1];
-        return time === "12:00:00";
+        return time === "21:00:00";
       });
-      var noonWeatherInfo = noonWeatherData.map(function (item) {
+      var timeWeatherInfo = timeWeatherData.map(function (item) {
         return [item.main.temp, item.wind.speed, item.main.humidity, item.weather[0].icon];
       });
       iter = 1;
 
-      noonWeatherInfo.forEach(function (info) {
+      timeWeatherInfo.forEach(function (info) {
         var iconCode = info[3];
         var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
         document.querySelector(`.five-day-icon-${iter}`).setAttribute("src", iconUrl);
@@ -124,4 +123,3 @@ function fiveDayWeather() {
       });
     });
 }
-fiveDayWeather();
